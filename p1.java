@@ -16,6 +16,14 @@ void setup() {
   horizon= height/3;
    reset();
 }
+void reset() {
+  goldX=200;
+  goldY=300;
+  heroX=400;
+  heroY=400;
+  monX=width-50;
+  monY=  random( horizon+20, height-20 );;
+}
 
 ///next frame: scene, monster, hero, gold.///
 void draw(){
@@ -23,8 +31,12 @@ void draw(){
   gold();
   mon();
   hero();
-  reset();
+  action();
   
+}
+void mousePressed() {
+  goldX=  mouseX;
+  goldY=mouseY;
 }
 
 ///scene: sky, sun , grass, house, trees.///
@@ -45,38 +57,39 @@ void scene(){
 
 ///characters: gold, monster, hero///
 void gold(){
-  fill(0); ellipse(goldX+200,goldY+300,40,30);
-  fill(250,243,96); ellipse( goldX+200,goldY+300,10,10);
-  ellipse( goldX+202,goldY+303,10,10);
-  ellipse( goldX+204,goldY+305,10,10);
-  ellipse( goldX+190,goldY+300,10,10);
-  ellipse( goldX+209,goldY+300,10,10);
+  fill(0); ellipse(goldX, goldY, 40,30);
+  fill(250,243,96); ellipse( goldX, goldY, 10,10);
+  ellipse( goldX+2, goldY+3, 10,10);
+  ellipse( goldX+4, goldY+5, 10,10);
+  ellipse( goldX-10, goldY, 10,10);
+  ellipse( goldX+9, goldY, 10,10);
 }
 
 void mon(){
-  fill(0); ellipse(monX+300,monY+350,20,20); //head//
-  fill(0); ellipse(monX+300,monY+365,20,25); //body//
-  fill(0); ellipse(monX+300,monY+385,20,30); // lower body//
-  fill(0); line(monX+300,monY+365,monX+260,monY+365); //body:left leg//
-  fill(0); line(monX+290,monY+365,monX+340,monY+365);// body: right leg//
-  fill(0); line(monX+300,monY+385,monX+260,monY+385); //lower body: left leg//
-  fill(0); line(monX+290,monY+385,monX+340,monY+385); //lower body: right leg// 
+  fill(0); ellipse(monX,monY, 20,20); //head//
+  fill(0); ellipse(monX,monY+15, 20,25); //body//
+  fill(0); ellipse(monX,monY+35, 20,30);               // lower body//
+  fill(0); line(monX,monY+15, monX-40, monY+15);      //body:left leg//
+  fill(0); line(monX-10,monY+15, monX+40,monY+15);    // body: right leg//
+  fill(0); line(monX,monY+35, monX-40,monY+35);       //lower body: left leg//
+  fill(0); line(monX-10,monY-15, monX+40,monY+35);    //lower body: right leg// 
 }
 
 void hero(){
-  fill(0); rect(heroX+400,heroY+400,40,40); //body//
-  fill(0); ellipse(heroX+420,heroY+380,40,40); //head//
-  fill(0); line(heroX+399,heroY+410,heroX+370,heroY+380); //left arm//
-  fill(0); line(heroX+440,heroY+410,heroX+470,heroY+380); //right arm//
-  fill(0); line(heroX+410,heroY+440,heroX+410,heroY+465); //leftleg//
-  fill(0); line(heroX+430,heroY+440,heroX+430,heroY+465); //right leg//
+  fill(0); rect(heroX,heroY, 40,40); //body//
+  fill(0); ellipse(heroX+20,heroY-20, 40,40); //head//
+  fill(0); line(heroX-1,heroY+10, heroX-30,heroY-20); //left arm//
+  fill(0); line(heroX+40,heroY+10, heroX+470,heroY+380); //right arm//
+  fill(0); line(heroX+10,heroY+40, heroX+410,heroY+465); //leftleg//
+  fill(0); line(heroX+30, heroY+40, heroX+430,heroY+465); //right leg//
 }
 
-void reset(){
+void action(){
  // goldX=goldX+1; goldY = goldY+random(1,4);
-  heroX=heroX+1; heroY= heroY-1;
-  heroX = heroX +(goldX-heroX)/150;
+  heroX = heroX + (goldX-heroX)/150;
   heroY += (goldY-heroY)/150;
+  monX += (heroX-monX)/150;
+  monY += (heroY-monY)/150;
  
   
 }
