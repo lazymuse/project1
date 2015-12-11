@@ -17,12 +17,12 @@ void setup() {
    reset();
 }
 void reset() {
-  goldX=200;
-  goldY=300;
-  heroX=400;
-  heroY=400;
-  monX=width-50;
-  monY=  random( horizon+20, height-20 );;
+  goldX=  random( width/4, width*3/4);
+  goldY=  random( horizon+20, height-20 );
+  heroX=  50;
+  heroY=  random( horizon+20, height-20 );
+  monX= width-50;
+  monY=  random( horizon+20, height-20 );
 }
 
 ///next frame: scene, monster, hero, gold.///
@@ -32,12 +32,17 @@ void draw(){
   mon();
   hero();
   action();
+  text( "r key to reset; q to quit", width/4, 40 );
   
 }
 void mousePressed() {
   goldX=  mouseX;
   goldY=mouseY;
 }
+void keyPressed() {
+  if (key == 'q') exit();
+  if (key == 'r') reset();
+}  
 
 ///scene: sky, sun , grass, house, trees.///
 void scene(){
